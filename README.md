@@ -1,0 +1,2 @@
+# 2D_Colision_Detection_Game
+Pure HTML5_Canvas and JS game without any library , space Shooting game , when anime killed by three bullet ,bullet sound , Backgroung music and anime kill effect and sound also added , background movement is also including in it , mostly used json objects to create anime and also for detect anime also used event listener and splice functions for kill anime and for make infinite bullets  json push and splice function which is called according to the condition of a bullet. 
