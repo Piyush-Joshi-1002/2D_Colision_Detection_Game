@@ -1,0 +1,294 @@
+<html> 
+ <head>
+<title>Save The Planet</title></head>
+ <body style = "padding: 0; margin: 0; background-color : midnightblue; ">
+     <!--<audio autoplay="true" name = "faudio" id = "faudio"  src="FirstBG.mp3"  hidden="true" autostart="false" ></audio>-->
+<marquee style ="padding: 0; margin: 0; background-color: ivory;"><font face="Algerian" size = "5px" color="green" style ="padding: 0; margin: 0;" >Save The Planet</font></marquee>
+&nbsp;<canvas id = "can" width ="900" height = "630" style = "border: 2px solid green; margin-top: 10;"></canvas>
+ <button onclick="upload()">click to Start game</button>
+ <script>
+var up;
+var can = document.getElementById("can");
+var ctx = can.getContext("2d");
+var background = new Image(); 
+background.src = "space-1545641037324-630.png";
+var fir;
+var dir;
+var kill;
+var j = 0;
+var wth = can.width;
+var lth = 0;
+var vth = 0;
+var mth = can.width;
+var nth = 0;
+var bg = new Image();
+var a = can.width-650;
+var b = can.height-60;
+var gameover = "no";
+var win;
+var w = "t";
+bg.src = "astronomy-constellation-dark-1341279.png";
+var FirstPage = new Image();
+FirstPage.src = "astronomy-constellation-dark-998641.png";
+    var blt = new Image();
+var enimy = new Image();
+enimy.src = "enemy.png";
+var enemy = [
+{"id":"enemy","x":-20,"y":10,"w":40,"h":30,"j":0},{"id":"enemy1","x":20,"y":10,"w":40,"h":30,"j":0},
+{"id":"enemy2","x":60,"y":10,"w":40,"h":30,"j":0},{"id":"enemy3","x":100,"y":10,"w":40,"h":30,"j":0},{"id":"enemy4","x":140,"y":10,"w":40,"h":30,"j":0},{"id":"enemy5","x":180,"y":10,"w":40,"h":30,"j":0},{"id":"enemy6","x":220,"y":10,"w":40,"h":30,"j":0},{"id":"enemy7","x":260,"y":10,"w":40,"h":30,"j":0},{"id":"enemy8","x":300,"y":10,"w":40,"h":30,"j":0},{"id":"enemy9","x":340,"y":10,"w":40,"h":30,"j":0},{"id":"enemy10","x":380,"y":10,"w":40,"h":30,"j":0},{"id":"enemy11","x":420,"y":10,"w":40,"h":30,"j":0},{"id":"enemy12","x":460,"y":10,"w":40,"h":30,"j":0},{"id":"enemy13","x":500,"y":10,"w":40,"h":30,"j":0},{"id":"enemy14","x":540,"y":10,"w":40,"h":30,"j":0},{"id":"enemy15","x":580,"y":10,"w":40,"h":30,"j":0},
+{"id":"enemy","x":-20,"y":40,"w":40,"h":30,"j":0},{"id":"enemy1","x":20,"y":40,"w":40,"h":30,"j":0},
+{"id":"enemy2","x":60,"y":40,"w":40,"h":30,"j":0},{"id":"enemy3","x":100,"y":40,"w":40,"h":30,"j":0},
+{"id":"enemy4","x":140,"y":40,"w":40,"h":30,"j":0},{"id":"enemy5","x":180,"y":40,"w":40,"h":30,"j":0},
+{"id":"enemy6","x":220,"y":40,"w":40,"h":30,"j":0},{"id":"enemy7","x":260,"y":40,"w":40,"h":30,"j":0},
+{"id":"enemy8","x":300,"y":40,"w":40,"h":30,"j":0},{"id":"enemy9","x":340,"y":40,"w":40,"h":30,"j":0},
+{"id":"enemy10","x":380,"y":40,"w":40,"h":30,"j":0},{"id":"enemy11","x":420,"y":40,"w":40,"h":30,"j":0},
+{"id":"enemy12","x":460,"y":40,"w":40,"h":30,"j":0},{"id":"enemy13","x":500,"y":40,"w":40,"h":30,"j":0},
+{"id":"enemy14","x":540,"y":40,"w":40,"h":30,"j":0},{"id":"enemy15","x":580,"y":40,"w":40,"h":30,"j":0},{"id":"enemy","x":-20,"y":70,"w":40,"h":30,"j":0},{"id":"enemy1","x":20,"y":70,"w":40,"h":30,"j":0},
+{"id":"enemy2","x":60,"y":70,"w":40,"h":30,"j":0},{"id":"enemy3","x":100,"y":70,"w":40,"h":30,"j":0},
+{"id":"enemy4","x":140,"y":70,"w":40,"h":30,"j":0},{"id":"enemy5","x":180,"y":70,"w":40,"h":30,"j":0},
+{"id":"enemy6","x":220,"y":70,"w":40,"h":30,"j":0},{"id":"enemy7","x":260,"y":70,"w":40,"h":30,"j":0},
+{"id":"enemy8","x":300,"y":70,"w":40,"h":30,"j":0},{"id":"enemy9","x":340,"y":70,"w":40,"h":30,"j":0},
+{"id":"enemy10","x":380,"y":70,"w":40,"h":30,"j":0},{"id":"enemy11","x":420,"y":70,"w":40,"h":30,"j":0},
+{"id":"enemy12","x":460,"y":70,"w":40,"h":30,"j":0},{"id":"enemy13","x":500,"y":70,"w":40,"h":30,"j":0},
+{"id":"enemy14","x":540,"y":70,"w":40,"h":30,"j":0},{"id":"enemy15","x":580,"y":70,"w":40,"h":30,"j":0},
+{"id":"enemy","x":-20,"y":100,"w":40,"h":30,"j":0},{"id":"enemy1","x":20,"y":100,"w":40,"h":30,"j":0},
+{"id":"enemy2","x":60,"y":100,"w":40,"h":30,"j":0},{"id":"enemy3","x":100,"y":100,"w":40,"h":30,"j":0},
+{"id":"enemy4","x":140,"y":100,"w":40,"h":30,"j":0},{"id":"enemy5","x":180,"y":100,"w":40,"h":30,"j":0},
+{"id":"enemy6","x":220,"y":100,"w":40,"h":30,"j":0},{"id":"enemy7","x":260,"y":100,"w":40,"h":30,"j":0},
+{"id":"enemy8","x":300,"y":100,"w":40,"h":30,"j":0},{"id":"enemy9","x":340,"y":100,"w":40,"h":30,"j":0},
+{"id":"enemy10","x":380,"y":100,"w":40,"h":30,"j":0},{"id":"enemy11","x":420,"y":100,"w":40,"h":30,"j":0},
+{"id":"enemy12","x":460,"y":100,"w":40,"h":30,"j":0},{"id":"enemy13","x":500,"y":100,"w":40,"h":30,"j":0},
+{"id":"enemy14","x":540,"y":100,"w":40,"h":30,"j":0},{"id":"enemy15","x":580,"y":100,"w":40,"h":30,"j":0},
+{"id":"enemy","x":-20,"y":130,"w":40,"h":30,"j":0},{"id":"enemy1","x":20,"y":130,"w":40,"h":30,"j":0},
+{"id":"enemy2","x":60,"y":130,"w":40,"h":30,"j":0},{"id":"enemy3","x":100,"y":130,"w":40,"h":30,"j":0},
+{"id":"enemy4","x":140,"y":130,"w":40,"h":30,"j":0},{"id":"enemy5","x":180,"y":130,"w":40,"h":30,"j":0},
+{"id":"enemy6","x":220,"y":130,"w":40,"h":30,"j":0},{"id":"enemy7","x":260,"y":130,"w":40,"h":30,"j":0},
+{"id":"enemy8","x":300,"y":130,"w":40,"h":30,"j":0},{"id":"enemy9","x":340,"y":130,"w":40,"h":30,"j":0},
+{"id":"enemy10","x":380,"y":130,"w":40,"h":30,"j":0},{"id":"enemy11","x":420,"y":130,"w":40,"h":30,"j":0},
+{"id":"enemy12","x":460,"y":130,"w":40,"h":30,"j":0},{"id":"enemy13","x":500,"y":130,"w":40,"h":30,"j":0},
+{"id":"enemy14","x":540,"y":130,"w":40,"h":30,"j":0},{"id":"enemy15","x":580,"y":130,"w":40,"h":30,"j":0},
+{"id":"enemy","x":-20,"y":160,"w":40,"h":30,"j":0},{"id":"enemy1","x":20,"y":160,"w":40,"h":30,"j":0},
+{"id":"enemy2","x":60,"y":160,"w":40,"h":30,"j":0},{"id":"enemy3","x":100,"y":160,"w":40,"h":30,"j":0},
+{"id":"enemy4","x":140,"y":160,"w":40,"h":30,"j":0},{"id":"enemy5","x":180,"y":160,"w":40,"h":30,"j":0},
+{"id":"enemy6","x":220,"y":160,"w":40,"h":30,"j":0},{"id":"enemy7","x":260,"y":160,"w":40,"h":30,"j":0},
+{"id":"enemy8","x":300,"y":160,"w":40,"h":30,"j":0},{"id":"enemy9","x":340,"y":160,"w":40,"h":30,"j":0},
+{"id":"enemy10","x":380,"y":160,"w":40,"h":30,"j":0},{"id":"enemy11","x":420,"y":160,"w":40,"h":30,"j":0},
+{"id":"enemy12","x":460,"y":160,"w":40,"h":30,"j":0},{"id":"enemy13","x":500,"y":160,"w":40,"h":30,"j":0},
+{"id":"enemy14","x":540,"y":160,"w":40,"h":30,"j":0},{"id":"enemy15","x":580,"y":160,"w":40,"h":30,"j":0}
+]
+//for movement of enemy//variabl for movement
+var ex,ey,ea,eb;
+//end movenent
+function randerEnemy(){
+    for(var i=0; i < enemy.length; i++)
+    {
+        if(enemy[i].x < 0)
+        {
+                ea = 5;
+        }
+        if(ea == 5)
+        {
+             enemy[i].x+=2;
+        }
+        if(enemy[i].x>can.width-35)
+        {
+            ea = -5;
+        }
+        if(ea == -5)
+        {
+            enemy[i].x-=2;
+        }
+            ctx.drawImage(enimy,enemy[i].x,enemy[i].y+=0.27,enemy[i].w,enemy[i].h);
+        if(enemy[i].y>can.height-30)
+        {
+            gameover = "GameOVER";
+        }
+    }
+}
+ blt.src = "bullet.png";
+         function fire(){
+            this.animat = [];
+          
+               this.rander = function(){
+                  for(var i=0; i < this.animat.length; i++){
+                    var m = this.animat[i];
+                    ctx.drawImage(blt,m.x,m.y-=5,m.w,m.h);
+                    enimies(this.animat[i],i);
+                    if(kill=="lost"){
+                   
+                     this.animat.splice(i,1);
+                    kill = "it's OK";
+                    }
+                    if(m.y <= 0){
+                    this.animat.splice(i,1);
+                    }
+                    if(enemy.length==0){
+gameover = "winner";
+}
+                    }
+               }
+         }
+
+function enimies(m,mi){
+                   for(var i = 0; i < enemy.length; i++){
+var e = enemy[i];
+if(m.y+20>=e.y  && m.y-20<=e.y && m.x+20>=e.x && m.x-20<=e.x){
+enemy[i].j+=1;
+if(enemy[i].j>=3){
+var margaya = new Audio("enemy.mp3");
+margaya.volume = 0.3;
+margaya.play();
+enemy.splice(i,1);
+
+}
+kill = "lost";
+}
+}
+
+}
+ctx.clearRect(0,0,can.width,can.height,);
+
+var FIRE = new fire();
+setInterval(update,1000/30);
+//sound effects
+var winsound =new Audio("ta da.mp3");
+var chearsound = new Audio("chear.mp3");
+var sound = new Audio("FirstBG.mp3");
+var GameBG = new Audio("GameBG.mp3");
+sound.volume = 0.2;
+GameBG.volume = 0.08;
+//end
+//winsound
+   
+//end
+    
+function update(){
+
+
+if(gameover != "GameOVER" && gameover != "start" && gameover != "winner"){
+sound.play();
+ctx.drawImage(FirstPage,0,0,can.width,can.height);
+document.addEventListener("keydown",function(e){
+if(e.keyCode==13){
+gameover = "start";
+sound.pause();
+}
+});
+}
+
+
+if(gameover == "start"){
+
+GameBG.play();
+ctx.fillRect(0,0,can.width,can.height);
+lth += 1;
+mth += 1;
+if(mth>can.height){
+mth = -can.height;
+}
+if(lth>can.height){
+lth = -can.height;
+} 
+
+ctx.drawImage(bg,vth,lth,can.width,can.height+6);
+ctx.drawImage(bg,nth,mth,can.width,can.height+6);
+ctx.drawImage(background,0,0,can.width,can.height);
+  randerEnemy();
+FIRE.rander();
+
+UpAndDown();
+
+
+//if()
+var img = new Image();
+img.src = "spaceship.png";
+ctx.drawImage(img,a-8.5,b+15,50,50);
+}
+var gradient = ctx.createLinearGradient(200,200,500,0);
+gradient.addColorStop("0.8", "magenta");
+gradient.addColorStop("0.5", "green");
+gradient.addColorStop("1.0", "red");
+if(gameover == "winner"){
+GameBG.pause();
+ctx.font = "40px Arial ";
+ctx.strokeStyle = gradient;
+ctx.strokeText("Congratulation",can.width/2-50,can.height/2-70);
+ctx.fill();
+ctx.font = "25px Arial ";
+ctx.fillStyle  = "orange";
+ctx.fillText("tab F5 or refresh to play again",can.width/2-120,can.height/2+20);
+if(w == "t"){
+winsound.play();
+w = "f";
+}
+setTimeout(function(){
+chearsound.play();
+},1000);
+ 
+}
+if(gameover == "GameOVER"){
+GameBG.pause();
+ctx.font = "40px Arial ";
+ctx.strokeStyle = gradient;
+ctx.strokeText("Game Over",can.width/2-50,can.height/2-70);
+ctx.fill();
+ctx.font = "25px Arial ";
+ctx.fillStyle  = "orange";
+ctx.fillText("tab F5 or refresh to play again",can.width/2-120,can.height/2+20);
+}
+}
+function UpAndDown(){
+addEventListener("keydown",function(e){
+if (e.keyCode==37){
+if(a >= 10){
+dir = "left";
+}}
+if (e.keyCode==39){
+dir = "right";
+}
+});
+addEventListener("keyup",function(e){
+if (e.keyCode==37){
+
+if(a >= 10){
+dir = "no";
+}
+}
+if (e.keyCode==39){
+dir = "no";
+}
+});
+if(dir == "left"){
+if(a >= 10){
+a-=5;
+}
+}
+if(dir == "right"){
+if(a <= can.width-50){
+a+=5;
+}
+}
+}
+setInterval(ctrl,220);
+function ctrl(){
+if(gameover == "start"){
+addEventListener("keydown",function(e){
+if(e.keyCode==38){
+fir = "fire";
+//FIRE.animat.push({"x":a,"y":b,"w":30,"h":30});
+}
+});
+addEventListener("keyup",function(e){
+if(e.keyCode==38){
+fir = "no";
+}
+});
+if (fir == "fire"){
+var audio = new Audio("bullet.mp3");
+audio.volume = 0.1;
+audio.play();
+FIRE.animat.push({"x":a,"y":b,"w":30,"h":30});
+}
+}
+}
+ </script></body></html> 
